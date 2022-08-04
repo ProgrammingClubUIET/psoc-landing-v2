@@ -63,6 +63,13 @@ const NavBar = () => {
                     </NextLink>
                 </BreadcrumbItem>
             }
+            {authV &&
+                <BreadcrumbItem>
+                            <NextLink href="/dashboard" passHref>
+                                <BreadcrumbLink>Dashboard</BreadcrumbLink>
+                            </NextLink>
+                </BreadcrumbItem>
+            }
             <BreadcrumbItem>
                 <NextLink href="/about" passHref>
                     <BreadcrumbLink>About</BreadcrumbLink>
