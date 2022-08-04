@@ -1,41 +1,45 @@
 import { Accordion, Box, Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import { isLeft } from "fp-ts/lib/Either";
+import { useEffect, useState } from "react";
+import AuthGuard from "../components/AuthGuard";
+import CenterSpinner from "../components/CenterSpinner";
 import MenteeMini from "../components/MenteeMini";
-import { MOCK_PROJECTS } from "./projects";
-
-const MOCK_APPLICANTS = [
-    {
-        menteeId: "1",
-        name: "Rupansh",
-        proposal: "I think I can help you with this project",
-        project: MOCK_PROJECTS[0]
-    },
-    {
-        menteeId: "2",
-        name: "Jivtesh",
-        proposal: "I want to learn frontend",
-        project: MOCK_PROJECTS[2]
-    }
-]
-
-export type Applicant = typeof MOCK_APPLICANTS[0]
+import { getApplicants } from "../lib/client/mentor";
+import { useGlobalStore } from "../lib/ctx/store";
+import { ApplicantsRes } from "./api/mentor/project-applicants";
 
 const Applicants = () => {
-    const nApplicants = MOCK_APPLICANTS.length;
+    const [applicants, setApplicants] = useState(undefined as ApplicantsRes[] | undefined);
+    const client = useGlobalStore(s => s.client);
+
+    useEffect(() => {
+        (async () => {
+            const res = await getApplicants(client);
+            if (isLeft(res)) return;
+
+            setApplicants(res.right);
+        })()
+    }, [])
 
     return (
-    <Flex width="full" bg="blue.500" justifyContent="center" pt="10vh" pb="5vh" minHeight="100vh">
-        <VStack alignItems="flex-start" spacing="3rem">
-            <Box>
-                <Heading color="white" size="4xl">All Mentees</Heading>
-                <Text color="blackAlpha.700" fontSize="2xl">Showing {nApplicants} Mentees</Text>
-            </Box>
-            <Flex bg="blue.50" width="90vw" rounded="0.3rem" boxShadow="dark-lg" overflow="hidden" pb="1rem">
-                <Accordion allowToggle allowMultiple width="full">
-                    {MOCK_APPLICANTS.map(MenteeMini)}
-                </Accordion>
-            </Flex>
-        </VStack>
-    </Flex>
+    <AuthGuard>
+        <Flex width="full" bg="blue.500" justifyContent="center" pt="10vh" pb="5vh" minHeight="100vh">
+            <VStack alignItems="flex-start" spacing="3rem">
+                <Box>
+                    <Heading color="white" size="4xl">All Mentees</Heading>
+                    <Text color="blackAlpha.700" fontSize="2xl" hidden={applicants == undefined}>Showing {applicants?.length} Mentees</Text>
+                </Box>
+                <Flex bg="blue.50" width="90vw" rounded="0.3rem" boxShadow="dark-lg" overflow="hidden" pb="1rem">
+                    {applicants ? 
+                        <Accordion allowToggle allowMultiple width="full">
+                        {applicants.map(MenteeMini)}
+                        </Accordion> :
+                        <CenterSpinner width="full" height="20vh"></CenterSpinner>
+                    }
+                </Flex>
+            </VStack>
+        </Flex>
+    </AuthGuard>
     )
 }
 

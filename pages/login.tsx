@@ -1,8 +1,11 @@
 import { Flex, HStack, VStack, Image, Text, Center, Heading, FormControl, FormLabel, Input, Box, Button, Divider } from "@chakra-ui/react";
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 import LoginForm from "../components/LoginForm";
 
 const Login: NextPage = () => {
+    const router = useRouter();
+    const { redirect } = router.query;
 
     return (
         <Flex width="full" bg="blue.400" height="100vh" justifyContent="center">
@@ -14,7 +17,7 @@ const Login: NextPage = () => {
                     </VStack>
                 </Center>
                 <Flex bg="blue.50" width="60vw" height="full" color="gray.700" alignItems="center" px="8rem" direction="column" justifyContent="center">
-                    <LoginForm/>
+                    <LoginForm redirect={redirect as string}/>
                 </Flex>
             </HStack>
         </Flex>

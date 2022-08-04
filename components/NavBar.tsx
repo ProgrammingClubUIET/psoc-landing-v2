@@ -2,10 +2,28 @@ import { Flex, Image, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Spacer } from 
 import { useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
 import NextLink from "next/link";
+import { useGlobalStore } from "../lib/ctx/store";
+import { useRouter } from "next/router";
 
+// TODO: improve this
 const NavBar = () => {
+    const auth = useGlobalStore(s => s.auth);
+    const setAuth = useGlobalStore(s => s.setAuth);
+    const [authV, setAuthV] = useState(false);
+    const router = useRouter();
+
     const { scrollYProgress, scrollY } = useScroll();
     const [opacity, setOpacity] = useState(1);
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        setAuth(undefined);
+        router.push("/login");
+    }
+
+    useEffect(() => {
+        setAuthV(auth != undefined)
+    });
 
     useEffect(() => {
         return scrollYProgress.onChange((s) => {
@@ -39,6 +57,9 @@ const NavBar = () => {
                     <BreadcrumbLink>Login</BreadcrumbLink>
                 </NextLink>
             </BreadcrumbItem>
+            {authV && <BreadcrumbItem>
+                <BreadcrumbLink onClick={logout}>Logout</BreadcrumbLink>
+            </BreadcrumbItem>}
             <BreadcrumbItem>
                 <NextLink href="/about" passHref>
                     <BreadcrumbLink>About</BreadcrumbLink>

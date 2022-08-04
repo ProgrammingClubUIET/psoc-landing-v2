@@ -1,7 +1,7 @@
 import { Image, Text, VStack, Flex, Box } from "@chakra-ui/react"
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
-import { ApplyProjectCtx } from "../../lib/apply-ctx";
+import { ApplyProjectCtx } from "../../lib/ctx/apply-ctx";
 import ProposalForm from "../../components/ProposalForm";
 
 const ApplyProject = ()  => {
@@ -9,7 +9,7 @@ const ApplyProject = ()  => {
     const { id } = router.query; 
     const applyProjectCtx = useContext(ApplyProjectCtx);
     const projInfo = applyProjectCtx.cache;
-    if (!projInfo) {
+    if (!projInfo || projInfo.id != id) {
         useEffect(() => {
             // TODO: fetch from api
             router.push("/")
