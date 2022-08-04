@@ -22,7 +22,7 @@ const StyledApplicants = (p: { mentees?: ApplicantsRes, heading: string }) => (
         <Center width="full" mt="1rem">
             {
                 p.mentees?.length != 0 ?
-                    <ApplicantsAccordion mentees={p.mentees} width="98%" boxShadow="lg" /> :
+                    <ApplicantsAccordion mentees={p.mentees} width="98%" boxShadow="lg" borderRadius="0.3em" /> :
                     <Text p="2rem" fontSize="xl" color="gray.400">No Applicants (yet)</Text>
             }
         </Center>
@@ -36,7 +36,7 @@ const StyledMentees = (p: { mentees?: MenteeInfo[], heading: string }) => (
         <Center width="full" mt="1rem">
             {
                 p.mentees?.length != 0 ?
-                    <Flex width="98%" boxShadow="lg">
+                    <Flex width="98%" boxShadow="lg" borderRadius="0.3em">
                         {p.mentees ?
                             p.mentees.map((m, i) => MenteeMini(m, i)) :
                             <CenterSpinner width="full" py="2rem"></CenterSpinner>
