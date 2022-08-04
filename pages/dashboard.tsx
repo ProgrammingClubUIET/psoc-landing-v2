@@ -1,4 +1,4 @@
-import { Flex, Heading, Text, Center, HStack } from "@chakra-ui/react";
+import { Flex, Heading, Text, Center, Box } from "@chakra-ui/react";
 import { isLeft } from "fp-ts/lib/Either";
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
@@ -30,7 +30,7 @@ const StyledApplicants = (p: { mentees?: ApplicantsRes, heading: string }) => (
 )
 
 const StyledMentees = (p: { mentees?: MenteeInfo[], heading: string }) => (
-    <Flex width="50%" bg="white" borderRadius="0.3rem" px="1.5rem" direction="column" py="1.5rem" boxShadow="lg">
+    <Flex height="fit-content" width="50%" bg="white" borderRadius="0.3rem" px="1.5rem" direction="column" py="1.5rem" boxShadow="lg">
         <Text fontSize="2xl">{p.heading}</Text>
         <Text fontSize="md" color="gray.400" hidden={p.mentees == undefined || p.mentees.length == 0}>Total {p.mentees?.length}</Text>
         <Center width="full" mt="1rem">
@@ -103,10 +103,11 @@ const Dashboard: NextPage = () => {
                     </Center>
                 </Flex>
                 <StyledApplicants heading="Applied Mentees" mentees={applicants} />
-                <HStack width="90vw" alignItems="center" mt="2rem">
+                <Flex width="90vw" mt="2rem" justifyContent="flex-start">
                     <StyledMentees heading="Accepted Mentees" mentees={mentees?.selectedMentees} />
+                    <Box width="1rem"></Box>
                     <StyledMentees heading="Finalized Mentees" mentees={mentees?.finalizedMentees} />
-                </HStack>
+                </Flex>
                 </> :
                 <CenterSpinner height="full" width="full" />
             }
