@@ -20,13 +20,14 @@ const LoginForm = (p: { redirect?: string }) => {
             return;
         }
 
-        localStorage.setItem("token", token.right.token);
-        setAuth(token.right.token);
+        const authObj = { token: token.right.token, role: token.right.user_info.role };
+        localStorage.setItem("auth", JSON.stringify(authObj));
+        setAuth(authObj);
     });
 
     useEffect(() => {
         if (auth)
-            router.push(p.redirect || "/");
+            router.push(p.redirect || "/dashboard");
 
     }, [auth])
 

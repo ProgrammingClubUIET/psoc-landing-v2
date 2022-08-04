@@ -2,30 +2,35 @@ import { isLeft, left, right } from "fp-ts/lib/Either";
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../lib/deps/prisma";
 import { expressRes, expressUnwrappErr } from "../../../lib/helpers/apiResp";
-import { bodyValidator } from "../../../lib/middleware/reqValidator";
-import { ProjectApplicantsReq } from "../../../lib/requests/projectApplicantsReq";
 import { ERR_PROJECT_NF } from "../mentee/apply-project";
 import { getMentor } from "./create-project";
 
-type MenteeInfo = {
-    name: string
+export type MenteeInfo = {
+    name: string,
+    project: {
+        id: string,
+        logo: string,
+        name: string
+    }
 }
 
-type MenteeRes = {
+export type MenteeRes = {
     selectedMentees: MenteeInfo[],
     finalizedMentees: MenteeInfo[]
 }
 
-async function handler(req: NextApiRequest, res: NextApiResponse, prReq: ProjectApplicantsReq) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
     const mentor = await getMentor(req);
     if (isLeft(mentor)) return expressUnwrappErr(res, mentor);
 
-    const proj = await prisma.project.findFirst({
+    const proj = await prisma.project.findMany({
         where: {
-            id: prReq.projectId,
             mentorId: mentor.right.mentor.id
         },
         select: {
+            id: true,
+            logo: true,
+            name: true,
             selectedMentees: {
                 select: {
                     user: {
@@ -48,17 +53,34 @@ async function handler(req: NextApiRequest, res: NextApiResponse, prReq: Project
     });
 
     if (!proj) return expressUnwrappErr(res, left(ERR_PROJECT_NF));
+    const selectedMentees: MenteeInfo[] = [];
+    const finalizedMentees: MenteeInfo[] = [];
+    proj.map(p => {
+        selectedMentees.push(...p.selectedMentees.map(m => ({
+            name: m.user.name,
+            project: {
+                id: p.id,
+                logo: p.logo,
+                name: p.name
+            }
+        })));
+
+        finalizedMentees.push(...p.finalizedMentees.map(m => ({
+            name: m.user.name,
+            project: {
+                id: p.id,
+                logo: p.logo,
+                name: p.name
+            }          
+        })))
+    })
 
     const ret: MenteeRes = {
-        selectedMentees: proj.selectedMentees.map(m => ({
-            name: m.user.name
-        })),
-        finalizedMentees: proj.finalizedMentees.map(m => ({
-            name: m.user.name
-        }))
+        selectedMentees,
+        finalizedMentees
     };
 
     return expressRes(res, right(ret));
 }
 
-export default bodyValidator(ProjectApplicantsReq, handler);
+export default handler;

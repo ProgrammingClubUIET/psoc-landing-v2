@@ -1,8 +1,9 @@
-import { AccordionItem, AccordionButton, AccordionPanel, HStack, Image, Text, Box, VStack, Button, AccordionIcon, Flex, Spacer, LinkOverlay, LinkBox } from "@chakra-ui/react";
+import { AccordionItem, AccordionButton, AccordionPanel, HStack, Image, Text, Box, VStack, Button, AccordionIcon, Flex, Spacer, LinkOverlay, LinkBox, ButtonProps } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { FaGithub, FaCheckCircle } from "react-icons/fa";
 import { ApplyProjectCtx } from "../lib/ctx/apply-ctx";
+import { useGlobalStore } from "../lib/ctx/store";
 import { ProjectRes } from "../pages/api/projects";
 
 const GithubTag = (p: { href: string }) => (
@@ -13,7 +14,7 @@ const GithubTag = (p: { href: string }) => (
     </LinkBox>
 )
 
-const ApplyTag = (p: {proj: ProjectRes }) => {
+const ApplyTag = (p: {proj: ProjectRes } & ButtonProps) => {
     const applyProjectCtx = useContext(ApplyProjectCtx);
     const router = useRouter();
     const onClick = () => {
@@ -27,19 +28,21 @@ const ApplyTag = (p: {proj: ProjectRes }) => {
         colorScheme="lgreen"
         size="lg"
         onClick={onClick}
+        {...p}
     >
         Apply
     </Button>
 }
 
-const ProjectMini = (proj: ProjectRes) => (
-    <AccordionItem key={proj.id}>
+const ProjectMini = (proj: ProjectRes, hideApply?: boolean, hideAuthor?: boolean) => {
+
+    return <AccordionItem key={proj.id}>
         <AccordionButton>
             <HStack alignItems="flex-start" spacing="4rem" width="full" p="2rem">
                 <Image borderRadius="full" boxSize="5em" src={proj.logo}></Image>
                 <Box textAlign="start">
                     <Text fontSize="3xl">{proj.name}</Text>
-                    <Text color="gray.600" fontSize="md">{proj.mentorName}</Text>
+                    <Text hidden={hideAuthor} color="gray.600" fontSize="md">{proj.mentorName}</Text>
                 </Box>
             </HStack>
             <AccordionIcon fontSize="lg"></AccordionIcon>
@@ -48,13 +51,13 @@ const ProjectMini = (proj: ProjectRes) => (
             <VStack alignItems="flex-start" spacing="2rem" pt="1rem" px="2rem">
                 <Flex width="full">
                     <GithubTag href={proj.url}></GithubTag>
-                    <Spacer></Spacer>
-                    <ApplyTag proj={proj}></ApplyTag>
+                    <Spacer hidden={hideApply}></Spacer>
+                    <ApplyTag hidden={hideApply} proj={proj}></ApplyTag>
                 </Flex>
                 <Text fontSize="xl">{proj.description}</Text>
             </VStack>
         </AccordionPanel>
     </AccordionItem>
-);
+};
 
 export default ProjectMini;

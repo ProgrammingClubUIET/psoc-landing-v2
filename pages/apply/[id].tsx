@@ -26,10 +26,10 @@ const ApplyProject = ()  => {
 
             setProjInfo(proj.right);
         })()
-    }, [router])
+    }, [router]);
 
     return (
-    <AuthGuard>
+    <AuthGuard role="MENTEE">
         <Flex bg="blue.400" width="100vw" minHeight="100vh" justifyContent="center" alignItems="center">
             <VStack bg="blue.50" width="60vw" py="2rem" mt="3rem" boxShadow="dark-lg" rounded="0.3rem" spacing="4rem">
                 { !projInfo ?

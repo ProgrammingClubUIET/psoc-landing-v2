@@ -15,3 +15,9 @@ export function getProject(client: BackendClient, projectId: string) {
         .then(v => right(v.data.data))
         .catch((e: AxiosError) => left(e.response!.data as ErrResp))
 }
+
+export function getProjectsByMentor(client: BackendClient) {
+    return axios.get<OkResp<ProjectRes[]>>("/api/projects/by-mentor", client)
+        .then(v => right(v.data.data))
+        .catch((e: AxiosError) => left(e.response!.data as ErrResp))
+}

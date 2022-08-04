@@ -27,3 +27,9 @@ export function authClient(
         return left(res.data);
     })
 }
+
+export function me(client: BackendClient) {
+    return axios.get<OkResp<{ name: string}>>("/api/user/me", client)
+    .then(v => right(v.data.data))
+    .catch((e: AxiosError) => left(e.response!.data as ErrResp))
+}
