@@ -88,7 +88,7 @@ const Dashboard: NextPage = () => {
 
             setMentees(res.right)
         })()
-    })
+    }, [])
 
     return <AuthGuard role="MENTOR">
         <Flex width="full" minHeight="100vh" bg="blue.500" pt="10vh" pb="5vh" px="3vw" alignItems="center" direction="column">
