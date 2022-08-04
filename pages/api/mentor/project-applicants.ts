@@ -20,7 +20,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     const mentor = await getMentor(req);
     if (isLeft(mentor)) return expressUnwrappErr(res, mentor);
 
-    const proj = await prisma.project.findFirst({
+    const proj = await prisma.project.findMany({
         where: {
             mentorId: mentor.right.mentor.id
         },
@@ -45,21 +45,24 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (!proj) return expressUnwrappErr(res, left(ERR_PROJECT_NF))
 
     const names: { [menteeId: string]: string } = {};
+    const ret: ApplicantsRes = [];
 
-    for (const mentee of proj.appliedMentees) {
-        names[mentee.id] = mentee.user.name;
+    for (const p of proj) {
+        for (const m of p.appliedMentees) {
+            names[m.id] = m.user.name;
+        }
+        ret.push(...p.applications.map((a, i) => ({
+            name: names[a.menteeId],
+            menteeId: a.menteeId,
+            application: a.application,
+            project: {
+                id: p.id,
+                logo: p.logo,
+                name: p.name
+            }
+        })));
     }
 
-    const ret: ApplicantsRes = proj.applications.map((a, i) => ({
-        name: names[a.menteeId],
-        menteeId: a.menteeId,
-        application: a.application,
-        project: {
-            id: proj.id,
-            logo: proj.logo,
-            name: proj.name
-        }
-    }));
 
     return expressRes(res, right(ret));
 }
