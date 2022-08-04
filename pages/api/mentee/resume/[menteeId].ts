@@ -7,7 +7,7 @@ import { MenteeResumeReq } from "../../../../lib/requests/menteeResume";
 
 const ERR_MENTEE_NF = errResp(404, "Mentee not found");
 
-async function handler(req: NextApiRequest, res: NextApiResponse, { menteeId }: MenteeResumeReq) {
+async function handler(_: NextApiRequest, res: NextApiResponse, { menteeId }: MenteeResumeReq) {
     const user = await prisma.mentee.findFirst({
         select: { resume: true },
         where: { id: menteeId }
