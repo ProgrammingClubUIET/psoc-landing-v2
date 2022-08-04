@@ -1,5 +1,5 @@
-import { AccordionButton, Center, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, HStack, Image, Text, VStack } from "@chakra-ui/react";
-import { FaClipboardCheck } from "react-icons/fa";
+import { AccordionButton, Center, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, HStack, Image, Text, VStack, LinkBox, LinkOverlay } from "@chakra-ui/react";
+import { FaClipboard, FaUserCheck } from "react-icons/fa";
 import { ApplicantsRes } from "../pages/api/mentor/project-applicants";
 
 const MenteeMini = (m: ApplicantsRes[0]) => (
@@ -15,19 +15,35 @@ const MenteeMini = (m: ApplicantsRes[0]) => (
             <AccordionIcon fontSize="lg"></AccordionIcon>
         </AccordionButton>
         <AccordionPanel>
-            <VStack alignItems="flex-start" px="2rem">
+            <VStack alignItems="flex-start" px="2rem" width="full">
                 <Text fontSize="lg">{m.application}</Text>
                 <Center width="full">
-                    <Button
-                        leftIcon={ <FaClipboardCheck size="1.5rem"/> }
-                        size="lg"
-                        rounded="full"
-                        colorScheme="lgreen"
-                        px="2rem"
-                        fontSize="xl"
-                    >
-                        Accept
-                    </Button>
+                    <HStack>
+                        <LinkBox>
+                            <Button
+                                leftIcon={ <FaClipboard size="1.5rem"/> }
+                                size="lg"
+                                rounded="full"
+                                colorScheme="red"
+                                px="2rem"
+                                fontSize="xl"
+                            >
+                                <LinkOverlay isExternal href={`/api/mentee/resume/${m.menteeId}`}>
+                                    Resume
+                                </LinkOverlay>
+                            </Button>
+                        </LinkBox>
+                        <Button
+                            leftIcon={ <FaUserCheck size="1.5rem" /> }
+                            size="lg"
+                            rounded="full"
+                            colorScheme="lgreen"
+                            px="2rem"
+                            fontSize="xl"
+                        >
+                            Accept
+                        </Button>
+                    </HStack>
                 </Center>
             </VStack>
         </AccordionPanel>

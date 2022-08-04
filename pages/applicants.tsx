@@ -9,7 +9,7 @@ import { useGlobalStore } from "../lib/ctx/store";
 import { ApplicantsRes } from "./api/mentor/project-applicants";
 
 const Applicants = () => {
-    const [applicants, setApplicants] = useState(undefined as ApplicantsRes[] | undefined);
+    const [applicants, setApplicants] = useState(undefined as ApplicantsRes | undefined);
     const client = useGlobalStore(s => s.client);
 
     useEffect(() => {
