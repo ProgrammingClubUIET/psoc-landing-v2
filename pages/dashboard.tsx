@@ -99,7 +99,12 @@ const Dashboard: NextPage = () => {
                     <Text fontSize="2xl" fontWeight="medium">Your Projects</Text>
                     <Text fontSize="md" color="gray.400" hidden={projects == undefined}>Total {projects?.length}</Text>
                     <Center width="full" mt="1rem">
-                        <ProjectsAccordion hideAuthor={true} borderRadius="0.3rem" width="98%" boxShadow="lg" hideApply projects={projects}></ProjectsAccordion>
+                        <ProjectsAccordion 
+                            hideAuthor={true} 
+                            flexProps={{borderRadius: "0.3rem", width: "98%", boxShadow: "lg"}}
+                            hideApply
+                            projects={projects}
+                        />
                     </Center>
                 </Flex>
                 <StyledApplicants heading="Applied Mentees" mentees={applicants} />

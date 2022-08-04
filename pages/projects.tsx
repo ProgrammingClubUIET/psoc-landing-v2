@@ -28,8 +28,7 @@ const Projects = () => {
                     <Text color="blackAlpha.700" fontSize="2xl" hidden={projects == undefined}>Showing {projects?.length} Projects</Text>
                 </Box>
                 <ProjectsAccordion
-                 bg="blue.50" width="90vw" rounded="0.3rem"
-                 boxShadow="dark-lg"
+                 flexProps={{bg: "blue.50", width: "90vw", rounded: "0.3rem", boxShadow: "dark-lg" }}
                  projects={projects}
                  hideApply={auth?.role == "MENTOR"}
                 ></ProjectsAccordion>
