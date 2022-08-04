@@ -52,14 +52,17 @@ const NavBar = () => {
                     <BreadcrumbLink>Projects</BreadcrumbLink>
                 </NextLink>
             </BreadcrumbItem>
-            <BreadcrumbItem>
-                <NextLink href="/login" passHref>
-                    <BreadcrumbLink>Login</BreadcrumbLink>
-                </NextLink>
-            </BreadcrumbItem>
-            {authV && <BreadcrumbItem>
-                <BreadcrumbLink onClick={logout}>Logout</BreadcrumbLink>
-            </BreadcrumbItem>}
+
+            {authV ?
+                <BreadcrumbItem>
+                    <BreadcrumbLink onClick={logout}>Logout</BreadcrumbLink>
+                </BreadcrumbItem> :
+                <BreadcrumbItem>
+                    <NextLink href="/login" passHref>
+                        <BreadcrumbLink>Login</BreadcrumbLink>
+                    </NextLink>
+                </BreadcrumbItem>
+            }
             <BreadcrumbItem>
                 <NextLink href="/about" passHref>
                     <BreadcrumbLink>About</BreadcrumbLink>
