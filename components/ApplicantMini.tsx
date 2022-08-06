@@ -60,7 +60,7 @@ const ApplicantMini = (m: ApplicantsRes[0]) => {
         <AcceptModal applicant={m} disclosure={disclosure}></AcceptModal>
         <AccordionButton>
             <HStack alignItems="flex-start" spacing="4rem" width="full" p="2rem">
-                <Image borderRadius="full" boxSize="5em" src={m.project.logo}></Image>
+                <Image alt="Project Logo" borderRadius="full" boxSize="5em" src={m.project.logo}></Image>
                 <Box textAlign="start">
                     <Text fontSize="3xl">{m.name}</Text>
                     <Text color="gray.600" fontSize="md">{m.project.name}</Text>

@@ -103,7 +103,7 @@ const MemberCard = (p: { i: number, img: string, name: string, desig: string, so
     ].flat();
 
     return <VStack key={p.i} bg="gray.100" py="1rem" borderRadius="1rem" width="25vw" textAlign="center">
-        <Image borderRadius="full" boxSize="7rem" src={p.img}></Image>
+        <Image alt="Member Image" borderRadius="full" boxSize="7rem" src={p.img}></Image>
         <Heading color="blue.700">{p.name}</Heading>
         <Text fontSize="2xl">{p.desig}</Text>
         <HStack spacing="2rem">

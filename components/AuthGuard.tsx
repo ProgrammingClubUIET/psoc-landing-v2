@@ -50,7 +50,7 @@ function AuthGuard(c: { children: JSX.Element, role?: Role }) {
             router.push({ pathname: "/login", query: { redirect: router.asPath }});
 
         }, 400)
-    }, [router, auth]);
+    }, [router, auth, c.role, loading, setAuth, setAuthVal]);
 
     if (authVal) return c.children;
 

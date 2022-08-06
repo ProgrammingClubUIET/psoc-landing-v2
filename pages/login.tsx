@@ -12,7 +12,7 @@ const Login: NextPage = () => {
             <HStack my="8vh" mx="4vw" height="90vh" spacing={0} rounded="0.3rem" overflow="hidden" boxShadow="dark-lg">
                 <Center bg="blue.600" width="20vw" height="full">
                     <VStack textAlign="center" align="center">
-                        <Image boxSize="20em" src="/img/psoc-logo-2.png"></Image>
+                        <Image alt="PSoC Logo" boxSize="20em" src="/img/psoc-logo-2.png"></Image>
                         <Text fontSize="3xl" color="white">Your first open source contribution is on us.</Text>
                     </VStack>
                 </Center>

@@ -29,7 +29,7 @@ const LoginForm = (p: { redirect?: string }) => {
         if (auth)
             router.push(p.redirect || "/dashboard");
 
-    }, [auth])
+    }, [auth, router, p.redirect])
 
     return (<>
         <Heading size="3xl">Login</Heading>

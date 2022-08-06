@@ -17,12 +17,12 @@ const Hero = () => (
                 </NextLink>
             </VStack>
             <Center boxSize="2xl">
-                <Image src="/img/pair-programming.svg"></Image>
+                <Image alt="Hero Image" src="/img/pair-programming.svg"></Image>
             </Center>
         </HStack>
         <Center boxSize="sm" width="full" position="relative" mt="0vh">
             <motion.div animate={{ y: "3.8rem" }} transition={{ repeat: Infinity, repeatType: "reverse", ease: "easeOut", duration: 2 }}>
-            <Image src="/img/arrow-down.svg"></Image>
+            <Image alt="Arrow Down" src="/img/arrow-down.svg"></Image>
             </motion.div>
         </Center>
     </VStack>

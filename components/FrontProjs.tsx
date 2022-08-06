@@ -3,7 +3,7 @@ import NextLink from "next/link";
 
 const ProjIcon = (p: { iconPath: string, name: string }) => (
     <VStack>
-        <Image boxSize="11em" src={`/img/project-logos/${p.iconPath}`} borderRadius="full"></Image>
+        <Image alt="Project Logo" boxSize="11em" src={`/img/project-logos/${p.iconPath}`} borderRadius="full"></Image>
         <Text color="white" fontWeight="bold">{p.name}</Text>
     </VStack>
 )

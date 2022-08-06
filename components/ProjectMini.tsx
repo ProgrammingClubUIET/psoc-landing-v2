@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import { FaGithub, FaCheckCircle } from "react-icons/fa";
 import { ApplyProjectCtx } from "../lib/ctx/apply-ctx";
-import { useGlobalStore } from "../lib/ctx/store";
 import { ProjectRes } from "../pages/api/projects";
 
 const GithubTag = (p: { href: string }) => (
@@ -40,7 +39,7 @@ const ProjectMini = (proj: ProjectRes, rightButton?: ProjectButton, hideAuthor?:
     return <AccordionItem key={proj.id}>
         <AccordionButton>
             <HStack alignItems="flex-start" spacing="4rem" width="full" p="2rem">
-                <Image borderRadius="full" boxSize="5em" src={proj.logo}></Image>
+                <Image alt="Project Logo" borderRadius="full" boxSize="5em" src={proj.logo}></Image>
                 <Box textAlign="start">
                     <Text fontSize="3xl">{proj.name}</Text>
                     <Text hidden={hideAuthor} color="gray.600" fontSize="md">{proj.mentorName}</Text>

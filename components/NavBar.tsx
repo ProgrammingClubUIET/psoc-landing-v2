@@ -23,18 +23,18 @@ const NavBar = () => {
 
     useEffect(() => {
         setAuthV(auth != undefined)
-    });
+    }, [auth]);
 
     useEffect(() => {
         return scrollYProgress.onChange((s) => {
             if (scrollY.get() == 0) return setOpacity(1);
             if (s >= 0.01 && opacity == 1) setOpacity(0.8);
         })
-    }, [opacity, scrollYProgress]);
+    }, [opacity, scrollYProgress, scrollY]);
 
 
     return <Flex width="full" bg="blue.700" px="4rem" py="0.5rem" position="fixed" zIndex="100" opacity={opacity} alignItems="center">
-        <Image src="/img/psoc-logo-1.png" boxSize="2.5em"></Image>
+        <Image alt="PSoC Logo" src="/img/psoc-logo-1.png" boxSize="2.5em"></Image>
         <Spacer></Spacer>
         <Breadcrumb color="white" fontSize="2xl" separator=" ">
             <BreadcrumbItem>

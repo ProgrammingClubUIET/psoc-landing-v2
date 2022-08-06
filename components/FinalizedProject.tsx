@@ -17,7 +17,7 @@ const FinalizedProject = (p: { project: ProjectRes }) => (
         <Heading size="lg">Your Finalized Project for PSoC 2022</Heading>
         <Spacer></Spacer>
         <VStack py="8vh" spacing="2rem">
-            <Image src={p.project.logo} rounded="full" boxSize="15em"></Image>
+            <Image alt="Project Logo" src={p.project.logo} rounded="full" boxSize="15em"></Image>
             <Box textAlign="center">
                 <Text fontSize="2xl">{p.project.name}</Text>
                 <Text fontSize="lg" color="gray.400">Mentor: {p.project.mentorName}</Text>

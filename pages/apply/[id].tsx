@@ -42,7 +42,7 @@ const ApplyProject = ()  => {
                 { !projInfo ?
                     <CenterSpinner width="full" /> :
                     <>
-                        <Image rounded="full" boxSize="15em" src={projInfo?.logo}></Image>
+                        <Image alt="Project Logo" rounded="full" boxSize="15em" src={projInfo?.logo}></Image>
                         <Text fontSize="2xl">{projInfo?.name}</Text>
                         <Box width="full" px="8rem">
                             <ProposalForm projectId={id as string}></ProposalForm>
