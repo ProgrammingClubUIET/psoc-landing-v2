@@ -14,7 +14,7 @@ const GithubTag = (p: { href: string }) => (
     </LinkBox>
 )
 
-const ApplyTag = (p: {proj: ProjectRes } & ButtonProps) => {
+export const ApplyTag = (p: {proj: ProjectRes } & ButtonProps) => {
     const applyProjectCtx = useContext(ApplyProjectCtx);
     const router = useRouter();
     const onClick = () => {
@@ -34,8 +34,9 @@ const ApplyTag = (p: {proj: ProjectRes } & ButtonProps) => {
     </Button>
 }
 
-const ProjectMini = (proj: ProjectRes, hideApply?: boolean, hideAuthor?: boolean) => {
+export type ProjectButton = (p: {proj: ProjectRes }) => JSX.Element;
 
+const ProjectMini = (proj: ProjectRes, rightButton?: ProjectButton, hideAuthor?: boolean) => {
     return <AccordionItem key={proj.id}>
         <AccordionButton>
             <HStack alignItems="flex-start" spacing="4rem" width="full" p="2rem">
@@ -51,8 +52,8 @@ const ProjectMini = (proj: ProjectRes, hideApply?: boolean, hideAuthor?: boolean
             <VStack alignItems="flex-start" spacing="2rem" pt="1rem" px="2rem">
                 <Flex width="full">
                     <GithubTag href={proj.url}></GithubTag>
-                    <Spacer hidden={hideApply}></Spacer>
-                    <ApplyTag hidden={hideApply} proj={proj}></ApplyTag>
+                    <Spacer hidden={rightButton == undefined}></Spacer>
+                    {rightButton && rightButton({proj})}
                 </Flex>
                 <Text fontSize="xl">{proj.description}</Text>
             </VStack>

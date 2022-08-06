@@ -50,6 +50,19 @@ export const getProjects = async (req: NextApiRequest, res: NextApiResponse, cur
     const user = await getAuthUser(req);
     const userId = isLeft(user) ? undefined : user.right.id;
 
+    if (userId) {
+        const proj = await prisma.project.findFirst({
+            select: { id: true },
+            where: {
+                finalizedMentees: {
+                    some: { userId }
+                }
+            }
+        });
+
+        if (proj) return expressRes(res, right([]))
+    }
+
     const query = {
         take: PAGE_SIZE,
         skip: typeof cursor == "string" ? 1 : 0,
@@ -57,7 +70,7 @@ export const getProjects = async (req: NextApiRequest, res: NextApiResponse, cur
         where: userId ? {
             appliedMentees: {
                 none: { userId }
-            }
+            },
         } : undefined,
         cursor: cursor ? {
             id: cursor

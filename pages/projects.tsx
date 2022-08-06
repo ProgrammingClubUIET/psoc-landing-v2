@@ -5,6 +5,7 @@ import { getProjects } from "../lib/client/projects";
 import { useGlobalStore } from "../lib/ctx/store";
 import type { ProjectRes } from "./api/projects";
 import ProjectsAccordion from "../components/ProjectsAccordion";
+import { ApplyTag } from "../components/ProjectMini";
 
 const Projects = () => {
     const [projects, setProjects] = useState(undefined as ProjectRes[] | undefined);
@@ -25,12 +26,15 @@ const Projects = () => {
             <VStack alignItems="flex-start" spacing="3rem">
                 <Box>
                     <Heading color="white" size="4xl">All Projects</Heading>
-                    <Text color="blackAlpha.700" fontSize="2xl" hidden={projects == undefined}>Showing {projects?.length} Projects</Text>
+                    <Text color="blackAlpha.700" fontSize="2xl" hidden={projects == undefined || projects.length == 0}>Showing {projects?.length} Projects</Text>
                 </Box>
                 <ProjectsAccordion
                  flexProps={{bg: "blue.50", width: "90vw", rounded: "0.3rem", boxShadow: "dark-lg" }}
                  projects={projects}
-                 hideApply={auth?.role == "MENTOR"}
+                 rightButton={
+                    auth?.role == "MENTOR" ?
+                     undefined : ApplyTag
+                 }
                 ></ProjectsAccordion>
             </VStack>
         </Flex>

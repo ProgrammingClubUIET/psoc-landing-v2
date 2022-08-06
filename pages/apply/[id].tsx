@@ -8,6 +8,7 @@ import { getProject } from "../../lib/client/projects";
 import { useGlobalStore } from "../../lib/ctx/store";
 import { isLeft } from "fp-ts/lib/Either";
 import CenterSpinner from "../../components/CenterSpinner";
+import { getFinalizedProject } from "../../lib/client/mentee";
 
 const ApplyProject = ()  => {
     const router = useRouter();
@@ -21,12 +22,18 @@ const ApplyProject = ()  => {
         if (projInfo) return;
 
         (async () => {
+            const finalizedProject = await getFinalizedProject(client);
+            if (finalizedProject) {
+                router.push("/dashboard");
+                return;
+            }
+
             const proj = await getProject(client, id as string);
             if (isLeft(proj)) return;
 
             setProjInfo(proj.right);
         })()
-    }, [router]);
+    }, [router, projInfo, id]);
 
     return (
     <AuthGuard role="MENTEE">
