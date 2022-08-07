@@ -14,7 +14,7 @@ const InfoBox = (p: { icon: IconType, head: string, desc: string } & PropsWithCh
 const WorkSection = () => (
     <VStack bg="gray.100" py="8rem" px="4rem" spacing="20">
         <Heading color="blue.700" size="3xl">How Does It Work?</Heading>
-        <SimpleGrid spacing={[10, 20, 40]} columns={{sm: 1, lg: 2}}>
+        <SimpleGrid spacing={[10, 20, 40]} columns={{sm: 1, lg: 3}}>
             <InfoBox head="Apply" desc="Interested mentees propose a project." icon={FaFileInvoice}>
             </InfoBox>
             <InfoBox head="Code" desc="Selected mentees, work on their project. mentees propose a project." icon={FaCode}>
