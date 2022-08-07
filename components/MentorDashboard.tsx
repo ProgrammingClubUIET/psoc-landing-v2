@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, SimpleGrid, Text } from "@chakra-ui/react";
 import { isLeft } from "fp-ts/lib/Either";
 import { useEffect, useState } from "react";
 import { getApplicants, getProjectMentees } from "../lib/client/mentor";
@@ -31,7 +31,7 @@ const StyledApplicants = (p: { mentees?: ApplicantsRes, heading: string }) => (
 )
 
 const StyledMentees = (p: { mentees?: MenteeInfo[], heading: string }) => (
-    <Flex height="fit-content" width="50%" bg="white" borderRadius="0.3rem" px="1.5rem" direction="column" py="1.5rem" boxShadow="lg">
+    <Flex height="fit-content" bg="white" borderRadius="0.3rem" px="1.5rem" direction="column" py="1.5rem" boxShadow="lg">
         <Text fontSize="2xl">{p.heading}</Text>
         <Text fontSize="md" color="gray.400" hidden={p.mentees == undefined || p.mentees.length == 0}>Total {p.mentees?.length}</Text>
         <Center width="full" mt="1rem">
@@ -89,11 +89,10 @@ const MentorDashboard = () => {
             accordionProps={{ hideAuthor: true }}
         ></ProjectsBoard>
         <StyledApplicants heading="Applied Mentees" mentees={applicants} />
-        <Flex width="90vw" mt="2rem" justifyContent="flex-start">
+        <SimpleGrid columns={[1, null, 2]} mt="2rem" gap="1rem" width="90vw">
             <StyledMentees heading="Accepted Mentees" mentees={mentees?.selectedMentees} />
-            <Box width="1rem"></Box>
             <StyledMentees heading="Finalized Mentees" mentees={mentees?.finalizedMentees} />
-        </Flex>
+        </SimpleGrid>
     </>
 }
 

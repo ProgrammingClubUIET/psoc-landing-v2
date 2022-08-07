@@ -33,10 +33,10 @@ const NavBar = () => {
     }, [opacity, scrollYProgress, scrollY]);
 
 
-    return <Flex width="full" bg="blue.700" px="4rem" py="0.5rem" position="fixed" zIndex="100" opacity={opacity} alignItems="center">
-        <Image alt="PSoC Logo" src="/img/psoc-logo-1.png" boxSize="2.5em"></Image>
+    return <Flex width="100%" bg="blue.700" py="0.5rem" position="fixed" zIndex="100" opacity={opacity} alignItems="center">
+        <Image ms={{base: "1rem", lg: "2rem"}} alt="PSoC Logo" src="/img/psoc-logo-1.png" boxSize="2.5em"></Image>
         <Spacer></Spacer>
-        <Breadcrumb color="white" fontSize="2xl" separator=" ">
+        <Breadcrumb color="white" fontSize="2xl" separator=" " ms={{base: "1rem"}} me={{md: "1rem", lg: "2rem"}}>
             <BreadcrumbItem>
                 <NextLink href="/" passHref>
                     <BreadcrumbLink>Home</BreadcrumbLink>

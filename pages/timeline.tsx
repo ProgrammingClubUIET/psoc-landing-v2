@@ -72,7 +72,7 @@ const EvBox = (p: { n: number, date: Date, desc: string }) => {
     if (p.n == TIMELINE.length) botLRad = "0";
 
     return <VStack
-        px="2rem" py="4rem" width="35vw"
+        px="2rem" py="4rem"
         alignItems={alignItems}
         borderTop={borderTop}
         borderLeft={borderL}
@@ -86,6 +86,7 @@ const EvBox = (p: { n: number, date: Date, desc: string }) => {
         marginRight={marginR}
         marginLeft={marginL}
         key={p.n}
+        direction="column"
     >
         <Text fontSize="xl" fontWeight="semibold">
             {p.date.toLocaleDateString(undefined, { year: "numeric", "month": "long", "day": "numeric" })}
@@ -99,13 +100,13 @@ const EvBox = (p: { n: number, date: Date, desc: string }) => {
 
 
 const Timeline: NextPage = () => (
-    <VStack bg="blue.600" width="full" pt="10vh" color="white">
+    <Flex bg="blue.600" width="100%" pt="6rem" color="white" direction="column" alignItems="center">
         <Heading size="4xl">Timeline</Heading>
         <Box boxSize="0.25em" width="12rem" bg="white"></Box>
-        <Flex direction="column" py="5rem">
+        <Flex direction="column" py="5rem" px="1rem">
             {TIMELINE.map((v, i) => EvBox({ n: i+1, ...v}))}
         </Flex>
-    </VStack>
+    </Flex>
 )
 
 export default Timeline;

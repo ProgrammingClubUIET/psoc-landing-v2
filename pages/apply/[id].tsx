@@ -37,14 +37,14 @@ const ApplyProject = ()  => {
 
     return (
     <AuthGuard role="MENTEE">
-        <Flex bg="blue.400" width="100vw" minHeight="100vh" justifyContent="center" alignItems="center">
-            <VStack bg="blue.50" width="60vw" py="2rem" mt="3rem" boxShadow="dark-lg" rounded="0.3rem" spacing="4rem">
+        <Flex bg="blue.400" justifyContent="center" alignItems="center" height="100vh">
+            <VStack bg="blue.50" mx={{base: "0.8rem"}} width={{md: "90vw", lg: "60vw"}} py="2rem" mt="3rem" boxShadow="dark-lg" rounded="0.3rem" spacing="4rem">
                 { !projInfo ?
                     <CenterSpinner width="full" /> :
                     <>
                         <Image alt="Project Logo" rounded="full" boxSize="15em" src={projInfo?.logo}></Image>
                         <Text fontSize="2xl">{projInfo?.name}</Text>
-                        <Box width="full" px="8rem">
+                        <Box width={{md: "full", lg: "full"}} px={["4rem", "5rem", "8rem"]}>
                             <ProposalForm projectId={id as string}></ProposalForm>
                         </Box>
                     </>

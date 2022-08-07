@@ -1,7 +1,7 @@
 import { Heading, VStack, Text } from "@chakra-ui/react";
 
 const StatBox = (p: { desc: string, stat: number, color: string, key: number }) => (
-    <VStack width="full" key={p.key}>
+    <VStack key={p.key}>
         <Heading size="4xl" color={p.color}>
             {p.stat}+
         </Heading>
@@ -12,4 +12,3 @@ const StatBox = (p: { desc: string, stat: number, color: string, key: number }) 
 );
 
 export default StatBox;
-

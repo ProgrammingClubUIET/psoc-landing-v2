@@ -8,13 +8,13 @@ import Testimonials from '../components/Testimonials';
 
 const Home: NextPage = () => {
   return (
-    <VStack width="full" alignItems="flex-start" spacing="0">
+    <Flex direction="column">
       <Hero></Hero>
       <FrontStats></FrontStats>
       <WorkSection></WorkSection>
       <FrontProjs></FrontProjs>
       <Testimonials></Testimonials>
-    </VStack>
+    </Flex>
   )
 }
 

@@ -14,7 +14,7 @@ const FinalizedProject = (p: { project: ProjectRes }) => (
         minHeight="90%"
         py="2rem"
     >
-        <Heading size="lg">Your Finalized Project for PSoC 2022</Heading>
+        <Heading size="lg" textAlign="center">Your Finalized Project for PSoC 2022</Heading>
         <Spacer></Spacer>
         <VStack py="8vh" spacing="2rem">
             <Image alt="Project Logo" src={p.project.logo} rounded="full" boxSize="15em"></Image>

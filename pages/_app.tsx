@@ -7,14 +7,10 @@ import { useRouter } from 'next/router';
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  return (
-    <ChakraProvider theme={theme}>
-      <Flex>
+  return <ChakraProvider theme={theme}>
         <NavBar key={router.asPath}></NavBar>
-        <Component {...pageProps}/>
-      </Flex>
+        <Component  {...pageProps}/>
     </ChakraProvider>
-  )
 }
 
 export default MyApp

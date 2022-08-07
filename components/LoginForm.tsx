@@ -32,18 +32,18 @@ const LoginForm = (p: { redirect?: string }) => {
     }, [auth, router, p.redirect])
 
     return (<>
-        <Heading size="3xl">Login</Heading>
-        <Box mt="8rem" width="full">
+        <Heading size={["2xl", "3xl"]}>Login</Heading>
+        <Box mt={["2rem", "4rem", "8rem"]} width="full">
             <form onSubmit={onSubmit}>
                 <FormControl isRequired>
-                    <FormLabel fontSize="2xl">Email Address</FormLabel>
+                    <FormLabel fontSize={["xl", "2xl"]}>Email Address</FormLabel>
                     <Input {...register("email")} py="1.8rem" size="lg" type="email" placeholder="example@abc.com"></Input>
                 </FormControl>
                 <FormControl isRequired mt="4">
-                    <FormLabel fontSize="2xl">Password</FormLabel>
+                    <FormLabel fontSize={["xl", "2xl"]}>Password</FormLabel>
                     <Input {...register("password")} py="1.8rem" size="lg" type="password" placeholder="Enter your password"></Input>
                 </FormControl>
-                <Button type="submit" mt="6rem" width="full" variant="primary" rounded="1rem">Sign In</Button>
+                <Button type="submit" mt={["1.5rem", "3rem", "6rem"]} width="full" variant="primary" rounded="1rem">Sign In</Button>
             </form>
         </Box>
     </>)

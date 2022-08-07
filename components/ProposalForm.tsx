@@ -1,5 +1,4 @@
 import { Button, FormControl, FormLabel, Textarea } from "@chakra-ui/react"
-import { isLeft } from "fp-ts/lib/Either";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { applyToProject } from "../lib/client/mentee";
@@ -12,8 +11,7 @@ const ProposalForm = (p: { projectId: string }) => {
 
     const onSubmit = handleSubmit(async (r) => {
         await applyToProject(client, { projectId: p.projectId, application: r.application });
-        // TODO: goto dashboard
-        router.push("/");
+        router.push("/dashboard");
     })
 
     return (<form onSubmit={onSubmit}>
@@ -25,4 +23,4 @@ const ProposalForm = (p: { projectId: string }) => {
     </form>)
 }
 
-export default ProposalForm;;
+export default ProposalForm;

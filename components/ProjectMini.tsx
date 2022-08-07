@@ -38,10 +38,10 @@ export type ProjectButton = (p: {proj: ProjectRes }) => JSX.Element;
 const ProjectMini = (proj: ProjectRes, rightButton?: ProjectButton, hideAuthor?: boolean) => {
     return <AccordionItem key={proj.id}>
         <AccordionButton>
-            <HStack alignItems="flex-start" spacing="4rem" width="full" p="2rem">
+            <HStack alignItems="center" spacing={["1rem", "2rem", "4rem"]} p={["1rem", "2rem"]} width="100%">
                 <Image alt="Project Logo" borderRadius="full" boxSize="5em" src={proj.logo}></Image>
                 <Box textAlign="start">
-                    <Text fontSize="3xl">{proj.name}</Text>
+                    <Text fontSize={["2xl", null, "3xl"]}>{proj.name}</Text>
                     <Text hidden={hideAuthor} color="gray.600" fontSize="md">{proj.mentorName}</Text>
                 </Box>
             </HStack>

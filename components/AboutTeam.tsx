@@ -102,7 +102,7 @@ const MemberCard = (p: { i: number, img: string, name: string, desig: string, so
         MaybeIcon(3, FaEnvelope, p.social.email)
     ].flat();
 
-    return <VStack key={p.i} bg="gray.100" py="1rem" borderRadius="1rem" width="25vw" textAlign="center">
+    return <VStack key={p.i} bg="gray.100" py="1rem" borderRadius="1rem" textAlign="center">
         <Image alt="Member Image" borderRadius="full" boxSize="7rem" src={p.img}></Image>
         <Heading color="blue.700">{p.name}</Heading>
         <Text fontSize="2xl">{p.desig}</Text>
@@ -115,10 +115,9 @@ const MemberCard = (p: { i: number, img: string, name: string, desig: string, so
 const AboutTeam = () => (
     <VStack spacing="3rem" py="4rem">
         <Heading size="4xl" color="blue.600">PSoC Team</Heading>
-        <SimpleGrid columns={3} spacingY="3rem" spacingX="1rem">
-            {TEAM.slice(0,6).map((v, i) => MemberCard({ i, ...v }))}
+        <SimpleGrid columns={[1, 2, 3]} spacingY="3rem" spacingX="1rem">
+            {TEAM.map((v, i) => MemberCard({ i, ...v }))}
         </SimpleGrid>
-        {MemberCard({ i: 6, ...TEAM[6] })}
     </VStack>
 );
 
