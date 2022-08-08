@@ -12,23 +12,23 @@ const Login: NextPage = () => {
             <Grid
                 my={{base: "2.9rem", md: "4rem", lg: "8vh"}}
                 mx="4vw"
-                templateColumns={["repeat(1, 1fr)", null, "repeat(3, 1fr)"]}
+                templateColumns={{base: "repeat(1, 1fr)", md: "repeat(1, 1r)", lg: "repeat(3, 1fr)"}}
                 rounded="0.3rem"
                 overflow="hidden"
                 boxShadow="dark-lg"
                 h={{lg: "88vh"}}
             >
                 <GridItem>
-                    <Center bg="blue.600" px={{lg: "8rem"}} py={["2rem", null, "0rem"]} h={{lg: "100%"}}>
+                    <Center bg="blue.600" px={{lg: "8rem"}} py={{base: "2rem", md: "2rem", lg: "0rem"}} h="100%">
                         <VStack textAlign="center" align="center">
                             <Image alt="PSoC Logo" boxSize={["15rem", null, "20em"]} src="/img/psoc-logo-2.png"></Image>
-                            <Text fontSize={["2xl", null, "3xl"]} color="white">Your first open source contribution is on us.</Text>
+                            <Text fontSize={{base: "2xl", md: "2xl", lg: "3xl"}} color="white">Your first open source contribution is on us.</Text>
                         </VStack>
                     </Center>
                 </GridItem>
                 <GridItem colSpan={2}>
                     <Flex
-                        h={{lg: "100%"}}
+                        h="100%"
                         bg="blue.50"
                         py={["2rem"]}
                         color="gray.700"
