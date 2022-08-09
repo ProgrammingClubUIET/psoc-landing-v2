@@ -4,6 +4,7 @@ import { Either, left, right } from "fp-ts/lib/Either";
 import { BackendClient } from ".";
 import { ErrResp, OkResp } from "../helpers/apiResp";
 import { LoginReq } from "../requests/login";
+import { RegisterReq } from "../requests/register";
 
 type LoginResp = {
     token: string,
@@ -26,6 +27,22 @@ export function authClient(
         const res = e.response!.data as ErrResp;
         return left(res.data);
     })
+}
+
+export type RegisterReqClient = RegisterReq & ({ mentee: { resume: string } } | { mentor: true });
+
+export function registerUser(
+    client: BackendClient,
+    req: RegisterReqClient
+): Promise<Either<string, LoginResp>> {
+    return axios.post<OkResp<LoginResp>>("/api/auth/register", req, client)
+    .then((v) => {
+        return right(v.data.data);
+    })
+    .catch((e: AxiosError) => {
+        const res = e.response!.data as ErrResp;
+        return left(res.data);
+    });
 }
 
 export function me(client: BackendClient) {

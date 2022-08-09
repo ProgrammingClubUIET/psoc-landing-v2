@@ -63,11 +63,14 @@ const NavBar = () => {
                     </NextLink>
                 </BreadcrumbItem>
             }
-            {authV &&
+            {authV ?
                 <BreadcrumbItem>
                             <NextLink href="/dashboard" passHref>
                                 <BreadcrumbLink>Dashboard</BreadcrumbLink>
                             </NextLink>
+                </BreadcrumbItem> :
+                <BreadcrumbItem>
+                    <NextLink href="/login" passHref>Register</NextLink>
                 </BreadcrumbItem>
             }
             <BreadcrumbItem>

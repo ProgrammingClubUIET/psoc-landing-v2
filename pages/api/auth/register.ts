@@ -11,16 +11,15 @@ import { bodyValidator } from "../../../lib/middleware/reqValidator";
 import { RegisterReq } from "../../../lib/requests/register";
 
 async function handler(_: NextApiRequest, res: NextApiResponse, user: RegisterReq) {
-    return expressUnwrappErr(res, left(errResp(403, "disabled")));
     const pwHash = await scryptHash(user.password);
     let mentee;
     let mentor;
     let role;
-    if (user.role == "mentee") {
-        mentee = { create: {} };
+    if ("mentee" in user) {
+        mentee = { create: { resume: user.mentee.resume } };
         role = Role.MENTEE;
     } else {
-        mentor = { create: {} };
+        mentor = { create: { } };
         role = Role.MENTOR;
     }
     const newUser = await prisma.user.create({
@@ -44,7 +43,7 @@ async function handler(_: NextApiRequest, res: NextApiResponse, user: RegisterRe
         user_info: {
             name: user.name,
             email: user.email,
-            role: user.role.toUpperCase(),
+            role
         },
         token
     }))

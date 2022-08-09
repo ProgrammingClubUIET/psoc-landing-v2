@@ -21,8 +21,8 @@ export const STATS = [
 ];
 
 const FrontStats = () => (
-    <SimpleGrid columns={[2, 4]} py="2rem">
-        {STATS.map((v, i) => <StatBox color="blue.600" {...v} key={i}></StatBox>)}
+    <SimpleGrid columns={[2, 2, 4]} py="2rem">
+        {STATS.map((v) => StatBox({...v, color: "blue.600"}))}
     </SimpleGrid>
 )
 

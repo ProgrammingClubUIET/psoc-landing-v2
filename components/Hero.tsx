@@ -1,4 +1,4 @@
-import { Flex, VStack, Stack, Text, Box, Button, Image, Center } from '@chakra-ui/react'
+import { Flex, VStack, Stack, Text, Box, Button, Image, Center, HStack } from '@chakra-ui/react'
 import { motion } from "framer-motion";
 import NextLink from "next/link";
 
@@ -10,11 +10,14 @@ const Hero = () => (
             <VStack justify="center" align={{base: "center", md: "center", lg: "flex-start"}} textAlign={["center", "center", "start"]}>
                 <Text maxW="60rem" color="white" fontSize={{ base: "4rem", md: "4rem", lg: "6rem"}} fontWeight="extrabold">PClub Summer Of Code</Text>
                 <Text color="white" fontSize="2xl">Your first open source contribution is on us.</Text>
-                <Center>
+                <HStack>
                     <NextLink href="/login" passHref>
                         <Button variant="primary">Mentor/Mentee Login</Button>
                     </NextLink>
-                </Center>
+                    <NextLink href="/register" passHref>
+                        <Button variant="primary">Mentor/Mentee Registration</Button>
+                    </NextLink>
+                </HStack>
             </VStack>
             <Center boxSize={{base: 0, md: "xl", lg: "2xl"}} width={{md: "100%"}}>
                 <Image boxSize={{base: 0, md: "xl", lg: "2xl"}} alt="Hero Image" src="/img/pair-programming.svg"></Image>
