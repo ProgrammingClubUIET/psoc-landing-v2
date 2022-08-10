@@ -70,7 +70,9 @@ const NavBar = () => {
                             </NextLink>
                 </BreadcrumbItem> :
                 <BreadcrumbItem>
-                    <NextLink href="/login" passHref>Register</NextLink>
+                    <NextLink href="/register" passHref>
+                        <BreadcrumbLink>Register</BreadcrumbLink>
+                    </NextLink>
                 </BreadcrumbItem>
             }
             <BreadcrumbItem>
