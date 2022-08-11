@@ -24,11 +24,8 @@ const Register: NextPage = () => {
                         </VStack>
                     </Center>
                 </GridItem>
-                <GridItem colSpan={2}>
+                <GridItem colSpan={2} overflow="scroll" minH="100%" bg="blue.50" py={["2rem"]}>
                     <Flex
-                        h="100%"
-                        bg="blue.50"
-                        py={["2rem"]}
                         color="gray.700"
                         alignItems="center"
                         px={["2rem", "4rem", "8rem"]}
