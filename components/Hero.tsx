@@ -5,17 +5,17 @@ import NextLink from "next/link";
 export const HERO_GRAD = "linear(to-t, cyan.400 13%, blue.600 60%)";
 
 const Hero = () => (
-    <Flex pt="6rem" pb="3.8rem" bgGradient={HERO_GRAD} direction="column" alignItems="center">
+    <Flex pt={{base: "8rem", md: "6rem"}} pb="3.8rem" bgGradient={HERO_GRAD} direction="column" alignItems="center">
         <Stack direction={{ base: "column", md: "column-reverse", lg: "row" }}>
             <VStack justify="center" align={{base: "center", md: "center", lg: "flex-start"}} textAlign={["center", "center", "start"]}>
                 <Text maxW="60rem" color="white" fontSize={{ base: "4rem", md: "4rem", lg: "6rem"}} fontWeight="extrabold">PClub Summer Of Code</Text>
                 <Text color="white" fontSize="2xl">Your first open source contribution is on us.</Text>
                 <HStack>
                     <NextLink href="/login" passHref>
-                        <Button variant="primary">Mentor/Mentee Login</Button>
+                        <Button variant="primary" py={{base: "1.5rem", md: "2rem"}} px={{base: "0.3rem", md: "1rem"}} fontSize={{base: "sm", md: "lg", lg: "xl"}}>Mentor/Mentee Login</Button>
                     </NextLink>
                     <NextLink href="/register" passHref>
-                        <Button variant="primary">Mentor/Mentee Registration</Button>
+                        <Button variant="primary" py={{base: "1.5rem", md: "2rem"}} px={{base: "0.3rem", md: "1rem"}} fontSize={{base: "sm", md: "lg", lg: "xl"}}>Mentor/Mentee Registration</Button>
                     </NextLink>
                 </HStack>
             </VStack>
