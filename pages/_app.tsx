@@ -4,6 +4,7 @@ import theme from "../theme";
 import NavBar from '../components/NavBar';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Footer from "../components/Footer";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -14,6 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <NavBar key={router.asPath}></NavBar>
         <Component  {...pageProps}/>
+        <Footer></Footer>
     </ChakraProvider>
 }
 
